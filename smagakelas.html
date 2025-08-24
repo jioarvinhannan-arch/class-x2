@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>kelas X-2 SMAGA</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #add8e6;
+      overflow-x: hidden;
+    }
+
+    /* Lingkaran background */
+    .circle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      animation: move 20s linear infinite;
+    }
+    .circle:nth-child(1) { animation-delay: 0s; }
+    .circle:nth-child(2) { animation-delay: 5s; }
+    .circle:nth-child(3) { animation-delay: 10s; }
+
+    @keyframes move {
+      0%   { transform: translateY(0) translateX(0); }
+      50%  { transform: translateY(-50px) translateX(20px); }
+      100% { transform: translateY(0) translateX(0); }
+    }
+
+    /* Header image */
+    .header-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      animation: fadeIn 1.5s ease;
+    }
+
+    /* Box info kelas */
+    .class-info {
+      background: white;
+      width: 90%;
+      border-radius: 15px;
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 800px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      animation: fadeUp 1s ease;
+    }
+    .class-info h1 { margin: 0; }
+    .class-info p { margin: 5px 0 0; color: #555; }
+
+    /* Menu tombol */
+    .menu {
+      background: white;
+      width: 95%;
+      border-radius: 15px;
+      margin: 20px auto;
+      padding: 15px;
+      max-width: 800px;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      animation: fadeUp 1.3s ease;
+    }
+    .menu button {
+      background: #eee;
+      width:100%;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 12px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin: 5px;
+    }
+    .menu button:hover {
+      width: 100%;
+      background: #87cefa;
+      color: white;
+      transform: scale(1.08);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    /* Konten dinamis */
+    .content-box {
+      background: white;
+      border-radius: 15px;
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 900px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+      display: none;
+    }
+    .content-box.show {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Struktur kelas */
+    .struktur h2,
+    .jadwal h2,
+    .piket h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      animation: fadeIn 1s ease;
+    }
+    .struktur-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+    .struktur-item {
+      background: linear-gradient(135deg, #ff7eb3, #ff758c);
+      border-radius: 15px;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+      transform: scale(0.9);
+      opacity: 0;
+      animation: fadeScale 0.6s forwards;
+    }
+    .struktur-item:nth-child(1) { animation-delay: 0.2s; }
+    .struktur-item:nth-child(2) { animation-delay: 0.4s; }
+    .struktur-item:nth-child(3) { animation-delay: 0.6s; }
+    .struktur-item:nth-child(4) { animation-delay: 0.8s; }
+    .struktur-item:nth-child(5) { animation-delay: 1s; }
+    .struktur-item:nth-child(6) { animation-delay: 1.2s; }
+    .struktur-item:nth-child(7) { animation-delay: 1.4s; }
+    .struktur-item:nth-child(8) { animation-delay: 1.6s; }
+
+    .struktur-item span {
+      display: block;
+      font-size: 14px;
+      margin-top: 5px;
+      font-weight: normal;
+    }
+    .struktur-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    /* Jadwal */
+    .jadwal table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      animation: fadeIn 1s ease;
+    }
+    .jadwal th, 
+    .jadwal td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+    .jadwal th {
+      background: #87cefa;
+      color: white;
+    }
+
+    /* Piket */
+    .piket ul {
+      list-style: none;
+      padding: 0;
+      font-size: 14px;
+      animation: fadeIn 1s ease;
+    }
+    .piket li {
+      margin: 5px 0;
+      padding: 8px;
+      background: #f0f8ff;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+    .piket li:hover {
+      transform: translateX(10px);
+    }
+
+    /* Keyframes */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes fadeScale {
+      from { opacity: 0; transform: scale(0.9); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    /* Responsif */
+    @media (max-width: 600px) {
+      .menu { flex-direction: column; }
+      .struktur-grid { grid-template-columns: 1fr; }
+    }
+    
+    .class-info {
+      
+      border-radius: 15px;
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 800px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      animation: fadeUp 1s ease;
+    }
+    .class-info h2 { margin: 0; }
+  
+    
+   .container {
+  display: flex;               /* supaya horizontal */
+  flex-direction: row;         /* arah ke samping */
+  overflow-x: auto;            /* scroll ke kanan */
+  gap: 10px;                   /* jarak antar item */
+  scroll-snap-type: x mandatory;
+  padding: 10px;
+  white-space: nowrap;         /* cegah turun ke bawah */
+}
+
+.container::-webkit-scrollbar {
+  display: none;               /* sembunyiin scrollbar */
+}
+
+.item {
+  flex: 0 0 auto;              /* penting! jangan mengecil/nyusun ke bawah */
+  width: 300px;
+  height: 200px;
+  border-radius: 10px;
+  scroll-snap-align: center;
+  overflow: hidden;
+  background: #ccc;
+}
+
+.item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;              /* cegah inline spacing */
+}
+
+
+.footer-img {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;       /* menyesuaikan lebar layar */
+  height: auto;      /* tinggi otomatis */
+  z-index: 1000;     /* selalu di atas */
+}
+
+/* Container teks berjalan */
+.marquee-container {
+  position: fixed;
+  bottom: 115px;                /* tetap di atas footer */
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 8px 0;
+  z-index: 1100;
+}
+
+/* Teksnya */
+.marquee-text {
+  display: inline-block;
+  white-space: nowrap;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  padding-left: 100%;          /* mulai dari kanan */
+  animation: marquee 12s linear infinite;
+}
+
+/* Animasi jalan dari kanan ke kiri */
+@keyframes marquee {
+  from { transform: translateX(0%); }
+  to   { transform: translateX(-100%); }
+}
+
+
+
+  </style>
+</head>
+<body>
+  <!-- Lingkaran animasi -->
+  <div class="circle" style="width:100px; height:100px; top:10%; left:20%;"></div>
+  <div class="circle" style="width:150px; height:150px; top:40%; left:60%;"></div>
+  <div class="circle" style="width:80px; height:80px; top:70%; left:30%;"></div>
+
+  <!-- Gambar -->
+  <img src="x2.jpg" alt="X-2" class="header-img">
+
+  <!-- Info kelas -->
+  <div class="class-info">
+    <h1>Kelas X-2 </h1>
+    <p>SMAN 3 Semarang • Tahun Ajaran 2025/2026</p>
+    <p>GANESHA 28</p>
+  </div>
+
+  <!-- Menu tombol -->
+  <div class="menu">
+    <button onclick="toggleContent('strukturKelas')">Struktur</button>
+    <button onclick="toggleContent('piketKelas')">Piket</button>
+    <button onclick="toggleContent('jadwalKelas')">Jadwal</button>
+  </div>
+
+  <!-- Struktur kelas -->
+  <div class="content-box struktur" id="strukturKelas">
+    <h2>Struktur Kelas</h2>
+    <div class="struktur-grid">
+      <div class="struktur-item">wali kelas<span>Sadono</span></div>
+      <div class="struktur-item">Ketua kelas<span>Gede</span></div>
+      <div class="struktur-item">wakil ketua<span>Anjani</span></div>
+      <div class="struktur-item">Sekretaris<span>Sinta dan Augiene</span></div>
+      <div class="struktur-item">Bendahara<span>Luvena dan Risma</span></div>
+      <div class="struktur-item"> kebersihan<span>Radit</span></div>
+      <div class="struktur-item">keamanan<span>Andra</span></div>
+      <div class="struktur-item">litbang<span>amar</span></div>
+    </div>
+  </div>
+
+  <!-- Piket kelas -->
+  <div class="content-box piket" id="piketKelas">
+    <h2>Jadwal Piket</h2>
+    <ul>
+      <li>Senin: aisya,anjani,amar,aqila,andreas,arthanti,michael,audrey</li>
+      <li>Selasa: chilma,brinnete,augiene,belvi,andra,icel,bilqis</li>
+      <li>Rabu: jio,luvena,indira,kiran,gede,kenzie,dela</li>
+      <li>Kamis: arif,rachel,radit,regan,nasywa,tegar,aluna</li>
+      <li>Jumat: yudis,risma,shinta,sanchia,savira,zeda,shafirza</li>
+    </ul>
+  </div>
+
+  <!-- Jadwal kelas -->
+  <div class="content-box jadwal" id="jadwalKelas">
+    <h2>Jadwal Pelajaran</h2>
+    <table>
+      <tr><th>Hari</th><th>Mata Pelajaran</th></tr>
+      <tr><td>Senin</td><td>BIO, EKO, BI, GEO, SOS, BJW</td></tr>
+      <tr><td>Selasa</td><td>PADBP, BING, PKWU, EKO, SEJ, MATWJB</td></tr>
+      <tr><td>Rabu</td><td>PJOK, PPKN, BIO, KIM, BI, FIS</td></tr>
+      <tr><td>Kamis</td><td>MATWJB, KIM, TIK, BING, SOS</td></tr>
+      <tr><td>Jumat</td><td>KKA, FIS, GEO, SEJ</td></tr>
+    </table>
+  </div>
+  
+  <!-- Info kelas -->
+  <div class="class-info">
+    <h2>GALERY CLASS</h2>
+  </div>
+  
+<div class="container">
+  <div class="item"><img src="g1.jpg" alt="Foto 1"></div>
+  <div class="item"><img src="g2.jpg" alt="Foto 1"></div>
+  <div class="item"><img src="g3.jpg" alt="Foto 1"></div>
+  <div class="item"><img src="g4.jpg" alt="Foto 1"></div>
+  <div class="item"><img src="g5.jpg" alt="Foto 1"></div>
+  <div class="item"><img src="g6.jpg" alt="Foto 1"></div>
+  <div class="item"><img src="g7.jpg" alt="Foto 1"></div>
+  <div class="item"><img src="g8.jpg" alt="Foto 1"></div>
+  <div class="item"><img src="g9.jpg" alt="Foto 1"></div>
+  <div class="item"><img src="g10.jpg" alt="Foto 1"></div>
+  <div class="item"><img src="g11.jpg" alt="Foto 1"></div>
+  <div class="item"><img src="g12.jpg" alt="Foto 1"></div>
+  
+
+
+
+<img src="wkwk.jpg" alt="Footer" class="footer-img">
+
+<!-- Teks animasi di atas footer -->
+<div class="marquee-container">
+  <div class="marquee-text">🎉 Selamat Datang di Website X-2 🎉</div>
+</div>
+
+
+  <script>
+    function toggleContent(id) {
+      const boxes = document.querySelectorAll('.content-box');
+      const target = document.getElementById(id);
+
+      boxes.forEach(box => {
+        if (box !== target) {
+          box.classList.remove("show");
+          setTimeout(() => { box.style.display = "none"; }, 500);
+          box.dataset.visible = 'false';
+        }
+      });
+
+      if (target.dataset.visible !== "true") {
+        target.style.display = "block";
+        setTimeout(() => target.classList.add("show"), 10);
+        target.dataset.visible = "true";
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+      } else {
+        target.classList.remove("show");
+        setTimeout(() => { target.style.display = "none"; }, 500);
+        target.dataset.visible = "false";
+      }
+    }
+    
+  </script>
+</body>
+</html>
